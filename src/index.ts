@@ -42,7 +42,3 @@ export class EditDistance {
         return currentCell;
     }
 }
-
-function lstein(s: string, t: string) {
-    return new EditDistance(s, t).calcEditDist();
-}
