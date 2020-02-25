@@ -1,0 +1,18 @@
+{
+  "name": "lstein",
+  "version": "1.0.0",
+  "description": "Wagner-Fischer implementation of the Levenshtein algorithm for string comparison",
+  "type": "module",
+  "main": "./cjs/index.js",
+  "exports": {
+    "./esm": "./esm/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "both": "tsc -p cjs && tsc -p esm"
+  },
+  "types": "./index.d.ts",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
