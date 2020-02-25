@@ -3,16 +3,34 @@
   "version": "1.0.0",
   "description": "Wagner-Fischer implementation of the Levenshtein algorithm for string comparison",
   "type": "module",
-  "main": "./lib/commonjs/index.js",
+  "files": [
+    "./lib",
+    "./types"
+  ],
   "exports": {
     "./esm": "./lib/esm/index.js"
   },
   "module": "./lib/esm/index.js",
+  "main": "./lib/commonjs/index.js",
   "scripts": {
+    "prepare": "tsc -p lib/commonjs && tsc -p lib/esm && tsc -p types",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "both": "tsc -p commonjs && tsc -p esm"
+    "both": "tsc -p lib/commonjs && tsc -p lib/esm && tsc -p types"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "levenshtein",
+    "wagner-fischer",
+    "node",
+    "typescript",
+    "javascript"
+  ],
+  "author": "Geert-Jan Zwiers",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GJZwiers/levenshtein.git"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.2"
+  }
 }

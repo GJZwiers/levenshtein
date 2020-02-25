@@ -42,3 +42,7 @@ export class EditDistance {
         return currentCell;
     }
 }
+
+export function lshtein(a: string, b: string) {
+    return new EditDistance(a,b).calcEditDist();
+}

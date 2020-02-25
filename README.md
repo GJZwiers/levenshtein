@@ -3,7 +3,10 @@ Calculates the edit distance i.e. the minimum changes required to change string 
 
 Installation:
 
-* npm i *to be determined*
+* npm i lstein (yet to be published)
 
 Usage:
-* import as Javascript module, either in commonJS or ESM module syntax
+* As ES6 Module:
+```import { EditDistance } from 'lstein/esm'```
+* Or as commonJS Module:
+```let lstein = require('lstein');```
