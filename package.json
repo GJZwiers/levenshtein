@@ -1,6 +1,6 @@
 {
   "name": "lshtein",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Wagner-Fischer implementation of the Levenshtein algorithm for string comparison",
   "type": "module",
   "files": [
