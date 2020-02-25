@@ -4,8 +4,8 @@
   "description": "Wagner-Fischer implementation of the Levenshtein algorithm for string comparison",
   "type": "module",
   "files": [
-    "./lib",
-    "./types"
+    "lib/*",
+    "types/**/*"
   ],
   "exports": {
     "./esm": "./lib/esm/index.js"
