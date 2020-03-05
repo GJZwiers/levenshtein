@@ -8,7 +8,7 @@ Installation:
 Usage:
 * As ES6 module:
 ```javascript
-import { lshtein } from 'lshtein/esm'
+import { lshtein } from 'lshtein'
 
 lshtein('kitten', 'sitting') // outputs 3
 ```
