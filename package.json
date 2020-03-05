@@ -4,19 +4,21 @@
   "description": "Wagner-Fischer implementation of the Levenshtein algorithm for string comparison",
   "type": "module",
   "files": [
-    "lib/*",
+    "lib/**/*",
     "types/**/*"
   ],
   "exports": {
-    "./esm": "./lib/esm/index.js"
+    ".": {
+      "require": "./lib/commonjs/index.js",
+      "default": "./lib/esm/index.js"
+    }
   },
   "module": "./lib/esm/index.js",
   "main": "./lib/commonjs/index.js",
   "types": "./types/index.d.ts",
   "scripts": {
     "prepare": "tsc -p lib/commonjs && tsc -p lib/esm && tsc -p types",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "both": "tsc -p lib/commonjs && tsc -p lib/esm && tsc -p types"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "levenshtein",

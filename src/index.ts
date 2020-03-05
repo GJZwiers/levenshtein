@@ -46,3 +46,7 @@ export class EditDistance {
 export function lshtein(a: string, b: string) {
     return new EditDistance(a,b).calcEditDist();
 }
+
+export function sim(eddist: number, strlen: number) {
+    return (eddist / strlen) * 100;
+}
