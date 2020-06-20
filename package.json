@@ -1,6 +1,6 @@
 {
   "name": "lshtein",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Calculate the minimum number of changes needed to turn string A into B with the Levenshtein edit distance",
   "type": "module",
   "files": [
