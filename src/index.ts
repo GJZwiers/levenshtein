@@ -1,8 +1,15 @@
+interface StringDistanceCalculation {
+    calculateDistance(): number;
+}
+
 /**
- * Calculates the Levenshtein edit distance or number of changes
- * required to turn one string into the other.
+ * Calculates the edit distance (number of changes
+ * required to turn one string into the other).
+ * @constructor
+ * @param {string} source - The first string in the comparison
+ * @param {string} target - The second string in the comparison
  */
-export class EditDistance {
+class EditDistanceCalculator implements StringDistanceCalculation {
     private grid: number[][] = [];
 
     constructor(private source: string, private target: string) {}
@@ -13,7 +20,7 @@ export class EditDistance {
 
         for (let j = 1; j <= this.target.length; ++j) {
             for (let i = 1; i <= this.source.length; ++i) {
-                this.grid[i][j] = this.determineCellValue(i, j);
+                this.grid[i][j] = this.calculateCellValue(i, j);
             }
         }
         return this.grid[this.source.length][this.target.length];
@@ -31,45 +38,60 @@ export class EditDistance {
         }
     }
 
-    private determineCellValue(i: number, j: number) {
-        let currentCell = this.grid[i][j];
+    private calculateCellValue(i: number, j: number) {
+        let cell = this.grid[i][j];
         if (this.source[i - 1] === this.target[j - 1]) {
-            currentCell = this.grid[i - 1][j - 1];
+            cell = this.grid[i - 1][j - 1];
         }
         else {
-            currentCell = Math.min.apply(Math, [
+            cell = Math.min.apply(Math, [
                 this.grid[i - 1][j] + 1,    // deletion
                 this.grid[i][j - 1] + 1,    // insertion
                 this.grid[i - 1][j - 1] + 1 // substitution
             ]);
         }
-        return currentCell;
+        return cell;
+    }
+}
+
+class EditDistance {
+    constructor(private distCalculator: StringDistanceCalculation) {}
+
+    calculate(): number {
+        return this.distCalculator.calculateDistance();
     }
 }
 
 /**
  * Returns the edit distance between strings a and b.
- * @param a
- * @param b 
+ * @param {string} a - The first string to be compared
+ * @param {string} b - The second string to be compared
  */
-export function lshtein(a: string, b: string): number {
-    if (typeof a !== 'string' || typeof b !== 'string') {
-        throw new Error('Levenshtein function arguments must be of type string');
+function lshtein(a: string, b: string): number {
+    if (typeof a !== 'string') {
+        throw new Error('Parameter a must be of type string');
     }
-    return new EditDistance(a,b).calculateDistance();
+    if (typeof b !== 'string') {
+        throw new Error('Parameter b must be of type string');
+    }
+    return new EditDistance(
+        new EditDistanceCalculator(a, b))
+        .calculate();
 }
 
 /**
  * Returns the similarity of two strings as a percentage.
- * @param editDistance - a previously calculated edit distance for two strings
- * @param len - the length of one of the two strings 
+ * @param {number} eddist - a previously calculated edit distance for two strings
+ * @param {number} len - the length of one of the two strings 
  */
-export function toPercent(editDistance: number, len: number): number {
-    if (typeof editDistance !== 'number') {
-        throw new Error('Edit distance must be of type number');
+function toPercent(eddist: number, len: number): number {
+    if (typeof eddist !== 'number') {
+        throw new Error('Parameter editDistance must be of type number');
     }
     if (typeof len !== 'number') {
-        throw new Error('len must be a string length of type number');
+        throw new Error('Parameter len must be of type number');
     }
-    return (editDistance / len) * 100;
+    return (eddist / len) * 100;
 }
+
+export { EditDistance, lshtein }

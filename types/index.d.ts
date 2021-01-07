@@ -1,26 +1,21 @@
-/**
- * Calculates the Levenshtein edit distance or number of changes
- * required to turn one string into the other.
- */
-export declare class EditDistance {
-    private source;
-    private target;
-    private grid;
-    constructor(source: string, target: string);
+interface StringDistanceCalculation {
     calculateDistance(): number;
-    private addSourceAsRows;
-    private addTargetAsColumns;
-    private determineCellValue;
+}
+declare class EditDistance {
+    private distCalculator;
+    constructor(distCalculator: StringDistanceCalculation);
+    calculate(): number;
 }
 /**
  * Returns the edit distance between strings a and b.
- * @param a
- * @param b
+ * @param {string} a - The first string to be compared
+ * @param {string} b - The second string to be compared
  */
-export declare function lshtein(a: string, b: string): number;
+declare function lshtein(a: string, b: string): number;
 /**
  * Returns the similarity of two strings as a percentage.
- * @param editDistance - a previously calculated edit distance for two strings
- * @param len - the length of one of the two strings
+ * @param {number} eddist - a previously calculated edit distance for two strings
+ * @param {number} len - the length of one of the two strings
  */
-export declare function toPercent(editDistance: number, len: number): number;
+declare function toPercent(eddist: number, len: number): number;
+export { EditDistance, lshtein, toPercent };
